@@ -13,7 +13,7 @@ export default Table;
 function TableHeader({ children }) {
   return (
     <thead>
-      <td>{children}</td>
+      <td className="title-row">{children}</td>
     </thead>
   );
 }

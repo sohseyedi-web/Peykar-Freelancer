@@ -10,29 +10,33 @@ const ProjectsTable = () => {
 
   if (!projects?.length) return <p>پروژه ای ایجاد نکردید</p>;
 
-
-  console.log(projects)
+  console.log(projects);
 
   return (
-    <Table>
-      <Table.Header>
-        <th>#</th>
-        <th>عنوان پروژه</th>
-        <th>دسته بندی</th>
-        <th>بودجه</th>
-        <th>ددلاین</th>
-        <th>تگ ها</th>
-        <th>فریلنسر</th>
-        <th>وضعیت</th>
-        <th>عملیات</th>
-        <th>درخواست ها</th>
-      </Table.Header>
-      <Table.Body>
-        {projects?.map((project, index) => (
-          <ProjectRow key={project?._id} project={project} index={index} />
-        ))}
-      </Table.Body>
-    </Table>
+    <div className="overflow-x-auto rounded-md shadow-md text-gray-100 bg-slate-900">
+      <table className="table">
+        {/* head */}
+        <thead>
+          <tr className=" text-gray-100">
+            <th>#</th>
+            <th>عنوان پروژه</th>
+            <th>دسته بندی</th>
+            <th>بودجه</th>
+            <th>ددلاین</th>
+            <th>تگ ها</th>
+            {/* <th>فریلنسر</th> */}
+            <th>وضعیت</th>
+            <th>عملیات</th>
+            <th>درخواست ها</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects?.map((project, index) => (
+            <ProjectRow key={project._id} index={index} project={project} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

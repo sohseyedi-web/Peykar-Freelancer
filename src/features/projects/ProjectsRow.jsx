@@ -1,12 +1,22 @@
 import * as RiIcon from "react-icons/ri";
 import Modal from "./../../ui/Modal";
+import truncateText from "./../../utils/truncateText";
+import { toPersianNumbersWithComma } from "./../../utils/toPersianNumbers";
+import toLocaleDate from "./../../utils/toLocalDateString";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProjectsRow = ({ project, index }) => {
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
   return (
     <tr key={project._id}>
-      <td>{index + 1}</td>
+      <td>{toPersianNumbersWithComma(index + 1)}</td>
       <td>
-        <p>{truncateText(project?.title, 30)}</p>
+        <div className="tooltip" data-tip={project?.title}>
+          <p>{truncateText(project?.title, 20)}</p>
+        </div>
       </td>
       <td>{project.category.title}</td>
       <td>{toPersianNumbersWithComma(project.budget)}</td>
@@ -20,10 +30,10 @@ const ProjectsRow = ({ project, index }) => {
           ))}
         </div>
       </td>
-      <td>{project?.freelancer?.name || "-"}</td>
+      {/* <td>{project?.freelancer?.name || "-"}</td> */}
       {/* <ToggleProjectStatus project={project} /> */}
       <td>
-        {project.status === "OPEN" ? (
+        {project?.status === "OPEN" ? (
           <span className="badge badge--success">باز</span>
         ) : (
           <span className="badge badge--error">بسته</span>
@@ -46,14 +56,17 @@ const ProjectsRow = ({ project, index }) => {
           >
             <RiIcon.RiDeleteBin2Line size={25} />
           </button>
-          <Modal onClose={() => setIsEditOpen(!isEditOpen)} open={isEditOpen}>
+          <Modal
+            onClose={() => setIsDeleteOpen(!isDeleteOpen)}
+            open={isDeleteOpen}
+          >
             hello
           </Modal>
         </div>
       </td>
       <td>
-        <Link to={project._id} className="text-center">
-          <RiIcon.RiEye2Line size={28} className="text-gray-600" />
+        <Link to={project._id} className="text-blue-500">
+          مشاهده اطلاعات
         </Link>
       </td>
     </tr>
