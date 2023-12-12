@@ -1,18 +1,38 @@
 import { useForm } from "react-hook-form";
+import SelectField from "../../ui/SelectField";
 import TextField from "../../ui/TextField";
 import { useCreateProject } from "./useCreateProject";
+import { useCategories } from "../../hooks/useCategories";
+import { TagsInput } from "react-tag-input-component";
+import DatePickerField from "../../ui/DatePickerField";
+import { useState } from "react";
 
-const CreateForm = () => {
+const CreateForm = ({ onClose }) => {
+  const [tags, setTags] = useState([]);
+  const [date, setDate] = useState(new Date(""));
   const { createProject, isCreating } = useCreateProject();
+  const { categories, transformCategories } = useCategories();
+
+  console.log(categories);
 
   const {
     register,
     formState: { errors },
+    reset,
     handleSubmit,
   } = useForm();
 
-  const onSumbit = (data) => {
-    console.log(data);
+  const onSumbit = async (data) => {
+    const newData = {
+      ...data,
+      tags,
+      deadline: new Date(date).toISOString(),
+    };
+    await createProject(newData, {
+      onSuccess: () => {
+        onClose(), reset();
+      },
+    });
   };
 
   return (
@@ -58,6 +78,29 @@ const CreateForm = () => {
           required: "مبلغ پروژه ضرروی است",
         }}
       />
+      <SelectField
+        validationSchema={{
+          required: "دسته بندی پروژه ضروری است",
+        }}
+        label={"دسته بندی"}
+        name={"category"}
+        options={categories}
+        register={register}
+        required
+      />
+      <div>
+        <label className="block mb-1 text-lg text-right" htmlFor="tags">
+          تگ محصولات
+        </label>
+        <TagsInput
+          id="tags"
+          value={tags}
+          onChange={setTags}
+          name="tags"
+          classNames={{ input: "" }}
+        />
+      </div>
+      <DatePickerField date={date} setDate={setDate} />
       <button className="btn btn--primary w-full">
         {isCreating ? "لطفا صبر کنید." : "تایید"}
       </button>

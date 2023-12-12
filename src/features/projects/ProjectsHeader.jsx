@@ -15,7 +15,7 @@ const ProjectsHeader = () => {
             پروژه جدید
         </button>
         <Modal onClose={() => setOpen(!open)} open={open}>
-          <CreateForm/>
+          <CreateForm onClose={() => setOpen(!open)}/>
         </Modal>
     </header>
   )
