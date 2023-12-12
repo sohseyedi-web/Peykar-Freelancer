@@ -2,8 +2,8 @@ import React from "react";
 
 const Table = ({ children }) => {
   return (
-    <div className="bg-gray-50 overflow-x-auto">
-      <table>{children}</table>
+    <div className="bg-gray-900 text-white rounded-md w-full overflow-x-auto">
+      <table className="">{children}</table>
     </div>
   );
 };

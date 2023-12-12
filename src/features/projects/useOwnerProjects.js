@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getOwnerProjectsApi } from "../../services/projectServie";
+import { getOwnerProjectsApi } from "../../service/projectServie";
 export const useOwnerProjects = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["owner-projects"],

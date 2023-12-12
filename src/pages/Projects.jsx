@@ -5,6 +5,7 @@ const Projects = () => {
   return (
     <>
       <ProjectsHeader/>
+      <hr className='border-slate-900 my-3'/>
       <ProjectsTable/>
     </>
   )
