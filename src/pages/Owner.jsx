@@ -8,7 +8,7 @@ const Owner = () => {
   console.log(data)
 
   return (
-    <div>Owner</div>
+    <div className='h-screen'>Owner</div>
   )
 }
 
