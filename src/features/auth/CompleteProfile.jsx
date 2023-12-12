@@ -1,25 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { completeProfile } from "../../service/authService";
 import TextField from "../../ui/TextField";
 import RadioInput from "../../ui/RadioInput";
 import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import RadioInputGroup from "../../ui/RadioInputGroup";
 
 const CompleteProfile = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
   const navigate = useNavigate();
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: completeProfile,
   });
 
-  const completedProfileHandler = async (e) => {
-    e.preventDefault();
+  const completedProfileHandler = async (data) => {
     try {
-      const { user, message } = await mutateAsync({ name, email, role });
+      const { user, message } = await mutateAsync(data);
       toast.success(message);
       if (user.status !== 2) {
         navigate("/");
@@ -34,39 +37,50 @@ const CompleteProfile = () => {
   };
 
   return (
-    <form className="space-y-3" onSubmit={completedProfileHandler}>
+    <form
+      className="space-y-3"
+      onSubmit={handleSubmit(completedProfileHandler)}
+    >
       <TextField
         label={"نام کاربری"}
         name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeHolder="مثلا : سهیل سیدی"
+        register={register}
+        required
+        validationSchema={{
+          required: "نام کاربری ضرروی است",
+        }}
+        errors={errors}
       />
       <TextField
         label={"ایمیل"}
         name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeHolder="example@gmail.com"
+        register={register}
+        required
+        validationSchema={{
+          required: "ایمیل کاربری ضرروی است",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "ایمیل نا معتبر است",
+          },
+        }}
+        errors={errors}
       />
-      <div dir="rtl" className="flex gap-x-4 w-full py-3">
-        <RadioInput
-          label={"کارفرما"}
-          id={"OWNER"}
-          name={"role"}
-          value={"OWNER"}
-          onChange={(e) => setRole(e.target.value)}
-          checked={role === "OWNER"}
-        />
-        <RadioInput
-          label={"فریلنسر"}
-          id={"FREELANCER"}
-          name={"role"}
-          value={"FREELANCER"}
-          onChange={(e) => setRole(e.target.value)}
-          checked={role === "FREELANCER"}
-        />
-      </div>
+      <RadioInputGroup
+        errors={errors}
+        watch={watch}
+        register={register}
+        configs={{
+          name: "role",
+          validationSchema: {
+            required: "ایمیل کاربری ضرروی است",
+          },
+          options: [
+            { label: "کارفرما", value: "OWNER" },
+            { label: "فریلنسر", value: "FREELANCER" },
+          ],
+        }}
+      />
+
       <button className="btn btn--primary w-full">
         {isPending ? "لطفا صبر کنید." : "تکمیل اطلاعات"}
       </button>

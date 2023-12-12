@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "../../ui/TextField";
 
-const SendOTP = ({ onChange, phone, loading, onSubmit }) => {
+const SendOTP = ({ loading, onSubmit, register, erros }) => {
   return (
     <form className="my-2" onSubmit={onSubmit}>
       <h4 className="text-xl text-right text-gray-100">ورورد / ثبت نام</h4>
@@ -9,9 +9,17 @@ const SendOTP = ({ onChange, phone, loading, onSubmit }) => {
         <TextField
           label={"شماره موبایل"}
           name={"phone"}
-          onChange={onChange}
-          value={phone}
           placeHolder="شماره موبایل خود را وارد کنید"
+          register={register}
+          required
+          errors={erros}
+          validationSchema={{
+            required: "شماره موبایل ضرروی است",
+            minLength: {
+              value: 11,
+              message: "شماره موبایل اشتباه است",
+            },
+          }}
         />
       </div>
       <button className="mt-2 btn btn--primary">

@@ -5,21 +5,27 @@ import CompleteProfile from "./CompleteProfile";
 import SendOTP from "./SendOTP";
 import { getOTP } from "../../service/authService";
 import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 const AuthContainer = () => {
   const [step, setStep] = useState(2);
-  const [phoneNumber, setPhoneNumber] = useState("09217476220");
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: getOTP,
   });
 
-  const sendOtpHandler = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm();
+
+  const sendOtpHandler = async () => {
     try {
-      await mutateAsync({ phoneNumber });
+      await mutateAsync({ phoneNumber: "09331559119" });
       setStep(2);
-      toast.success(`کد به شماره ${phoneNumber} ارسال شد`);
+      toast.success(data.message);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -30,17 +36,16 @@ const AuthContainer = () => {
       case 1:
         return (
           <SendOTP
-            phone={phoneNumber}
-            onStep={setStep}
-            onSubmit={sendOtpHandler}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onSubmit={handleSubmit(sendOtpHandler)}
             loading={isPending}
+            register={register}
+            errors={errors}
           />
         );
       case 2:
         return (
           <CheckOTP
-            phoneNumber={phoneNumber}
+            phoneNumber={"09331559119"}
             onStep={setStep}
             onResend={sendOtpHandler}
           />
