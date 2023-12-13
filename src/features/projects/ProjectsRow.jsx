@@ -5,10 +5,14 @@ import { toPersianNumbersWithComma } from "./../../utils/toPersianNumbers";
 import toLocaleDate from "./../../utils/toLocalDateString";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import CreateForm from "./CreateForm";
+import ConfrimDelete from "../../ui/ConfirmDelete";
+import { useRemoveProject } from "./useRemoveProject";
 
 const ProjectsRow = ({ project, index }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const { isDeleting, removeProject } = useRemoveProject();
 
   return (
     <tr key={project._id}>
@@ -47,8 +51,12 @@ const ProjectsRow = ({ project, index }) => {
           >
             <RiIcon.RiEdit2Line size={25} />
           </button>
-          <Modal onClose={() => setIsEditOpen(!isEditOpen)} open={isEditOpen}>
-            this is modal
+          <Modal
+            onClose={() => setIsEditOpen(!isEditOpen)}
+            open={isEditOpen}
+            title={`ویرایش پروژه ${project?.title}`}
+          >
+            <CreateForm onClose={() => setIsEditOpen(!isEditOpen)} />
           </Modal>
           <button
             className="text-red-500"
@@ -59,8 +67,18 @@ const ProjectsRow = ({ project, index }) => {
           <Modal
             onClose={() => setIsDeleteOpen(!isDeleteOpen)}
             open={isDeleteOpen}
+            title={`حذف ${project?.title}`}
           >
-            hello
+            <ConfrimDelete
+              title={project?.title}
+              loading={isDeleting}
+              onClose={() => setIsDeleteOpen(!isDeleteOpen)}
+              onRemove={() =>
+                removeProject(project?._id, {
+                  onSuccess: () => setIsDeleteOpen(!isDeleteOpen),
+                })
+              }
+            />
           </Modal>
         </div>
       </td>

@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import * as RiIcon from "react-icons/ri";
 
-const Modal = ({ open, onClose, children }) => {
+const Modal = ({ open, onClose, children,title }) => {
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10 text-right" onClose={onClose}>
@@ -34,7 +34,7 @@ const Modal = ({ open, onClose, children }) => {
                   <span className="cursor-pointer" onClick={onClose}>
                     <RiIcon.RiCloseLine size={28} />
                   </span>
-                  <h3>ایجاد پروژه </h3>
+                  <h3>{title}</h3>
                 </Dialog.Title>
                 <hr className="border-slate-700"/>
                 {children}

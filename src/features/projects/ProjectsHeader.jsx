@@ -14,7 +14,7 @@ const ProjectsHeader = () => {
             <RiIcon.RiAddFill size={26}/>
             پروژه جدید
         </button>
-        <Modal onClose={() => setOpen(!open)} open={open}>
+        <Modal onClose={() => setOpen(!open)} open={open} title={"ایجاد پروژه"}>
           <CreateForm onClose={() => setOpen(!open)}/>
         </Modal>
     </header>
