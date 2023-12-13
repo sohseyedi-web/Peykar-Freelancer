@@ -6,7 +6,7 @@ export const useProposals = () => {
     queryFn: getProposalsApi,
   });
 
-  const { proposals } = data || {};
+  const {proposals} = data || {}
 
   return { isLoading, proposals };
 };

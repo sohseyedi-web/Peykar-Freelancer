@@ -1,8 +1,13 @@
-import React from 'react'
+import ProposalHeader from './../features/proposals/ProposalHeader';
+import ProposalTable from './../features/proposals/ProposalTable';
 
 const Proposals = () => {
   return (
-    <div>Proposals</div>
+    <>
+      <ProposalHeader/>
+      <hr className='border-slate-900 my-3'/>
+      <ProposalTable/>
+    </>
   )
 }
 

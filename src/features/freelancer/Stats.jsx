@@ -4,7 +4,7 @@ import Stat from "../../ui/Stat";
 
 const Stats = ({ loading, proposals }) => {
   const proposalsLen = proposals?.length;
-  const numOfAcceptedProject = proposals.map((prj) => prj.status === 2).length;
+  const numOfAcceptedProject = proposals?.map((prj) => prj.status === 2).length;
   const balance = proposals?.reduce(
     (acc, cur) => acc + cur.price,
     0

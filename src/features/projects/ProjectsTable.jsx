@@ -1,6 +1,5 @@
 import { useOwnerProjects } from "./useOwnerProjects";
 import Loading from "./../../ui/Loading";
-import Table from "./../../ui/Table";
 import ProjectRow from "./ProjectsRow";
 
 const ProjectsTable = () => {
@@ -10,7 +9,6 @@ const ProjectsTable = () => {
 
   if (!projects?.length) return <p>پروژه ای ایجاد نکردید</p>;
 
-  console.log(projects);
 
   return (
     <div className="overflow-x-auto rounded-md shadow-md text-gray-100 bg-slate-900">
