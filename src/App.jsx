@@ -7,6 +7,9 @@ import NotFound from "./pages/NotFound";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import OwnerLayout from "./features/owner/OwnerLayout";
+import FreeLancerLayout from "./features/freelancer/FreeLancerLayout";
+import Proposals from "./pages/Proposals";
+import SubmitedProjects from "./pages/SubmitedProjects";
 
 function App() {
   return (
@@ -20,7 +23,12 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<Project />} />
         </Route>
-        <Route path="/freelancer" element={<FreeLancer />} />
+        <Route path="/freelancer" element={<FreeLancerLayout />}>
+          <Route index element={<Navigate to={"dashboard"} replace />} />
+          <Route path="dashboard" element={<FreeLancer />} />
+          <Route path="projects" element={<SubmitedProjects />} />
+          <Route path="proposals" element={<Proposals />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
