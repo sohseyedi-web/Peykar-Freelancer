@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import * as HiIcon from "react-icons/hi";
 import CustomNavlink from "../../ui/AppLayout/CustomNavlink";
 import Layout from "../../ui/AppLayout/Layout";
@@ -5,7 +6,9 @@ import Sidebar from "../../ui/AppLayout/Sidebar";
 
 const OwnerDashboard = () => {
   return (
-    <Layout>
+    <>
+      <Helmet><title>پنل کارفرما</title></Helmet>
+      <Layout>
       <Sidebar>
         <CustomNavlink to={"dashboard"}>
           <HiIcon.HiHome size={24} />
@@ -17,6 +20,7 @@ const OwnerDashboard = () => {
         </CustomNavlink>
       </Sidebar>
     </Layout>
+    </>
   );
 };
 
