@@ -1,9 +1,19 @@
-import React from 'react'
+import useUser from "../features/auth/useUser";
+import Stats from "../features/freelancer/Stats";
+import { useProposals } from "../features/proposals/useProposals";
+import HeaderDashboard from "../ui/HeaderDashboard";
 
 const FreeLancer = () => {
-  return (
-    <div>FreeLancer</div>
-  )
-}
+  const { data } = useUser();
+  const { isLoading, proposals } = useProposals();
 
-export default FreeLancer
+  return (
+    <>
+      <HeaderDashboard user={data?.user} />
+      <hr className="border-slate-900 my-3" />
+      <Stats loading={isLoading} proposals={proposals} />
+    </>
+  );
+};
+
+export default FreeLancer;

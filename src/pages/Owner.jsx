@@ -1,21 +1,19 @@
-import useUser from '../features/auth/useUser'
-import OwnerDashboard from '../features/owner/OwnerDashboard'
-import Stats from '../features/owner/Stats'
-import { useOwnerProjects } from '../features/projects/useOwnerProjects'
+import useUser from "../features/auth/useUser";
+import Stats from "../features/owner/Stats";
+import { useOwnerProjects } from "../features/projects/useOwnerProjects";
+import HeaderDashboard from "../ui/HeaderDashboard";
 
 const Owner = () => {
-
-  const {data} = useUser()
-  const {projects , isLoading} = useOwnerProjects()
-
+  const { data } = useUser();
+  const { projects, isLoading } = useOwnerProjects();
 
   return (
-    <div className='h-screen'>
-      <OwnerDashboard user={data?.user}/>
-      <hr className='border-slate-900 my-3'/>
-      <Stats loading={isLoading} projects={projects}/>
-    </div>
-  )
-}
+    <>
+      <HeaderDashboard user={data?.user} />
+      <hr className="border-slate-900 my-3" />
+      <Stats loading={isLoading} projects={projects} />
+    </>
+  );
+};
 
-export default Owner
+export default Owner;

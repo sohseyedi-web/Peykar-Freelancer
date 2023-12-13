@@ -1,6 +1,7 @@
-import toLocaleDate from "../../utils/toLocalDateString";
+import React from "react";
+import toLocaleDate from './../utils/toLocalDateString';
 
-const OwnerDashboard = ({ user }) => {
+const HeaderDashboard = ({ user }) => {
   return (
     <header className="flex items-center justify-between">
       <div className="flex items-center gap-x-2">
@@ -16,4 +17,4 @@ const OwnerDashboard = ({ user }) => {
   );
 };
 
-export default OwnerDashboard;
+export default HeaderDashboard;
