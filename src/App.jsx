@@ -4,9 +4,9 @@ import Auth from "./pages/Auth";
 import Owner from "./pages/Owner";
 import FreeLancer from "./pages/FreeLancer";
 import NotFound from "./pages/NotFound";
-import Layout from "./ui/AppLayout/Layout";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
+import OwnerLayout from "./features/owner/OwnerLayout";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/join" element={<Auth />} />
-        <Route path="/owner" element={<Layout />}>
+        <Route path="/owner" element={<OwnerLayout />}>
           <Route index element={<Navigate to={"dashboard"} replace />} />
           <Route path="dashboard" element={<Owner />} />
           <Route path="projects" element={<Projects />} />

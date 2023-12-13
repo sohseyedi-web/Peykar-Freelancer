@@ -3,7 +3,7 @@ import {getUserProfile} from '../../service/authService'
 
 export default function useUser() {
   const { data, isLoading } = useQuery({
-    queryKey: ["get-user"],
+    queryKey: ["user"],
     queryFn: getUserProfile,
     retry: false,
   });
