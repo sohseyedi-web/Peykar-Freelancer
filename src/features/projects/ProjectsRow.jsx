@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import CreateForm from "./CreateForm";
 import ConfrimDelete from "../../ui/ConfirmDelete";
 import { useRemoveProject } from "./useRemoveProject";
+import ToggleProjectStatus from "./ToggleProjectStatus";
 
 const ProjectsRow = ({ project, index }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -35,14 +36,14 @@ const ProjectsRow = ({ project, index }) => {
         </div>
       </td>
       {/* <td>{project?.freelancer?.name || "-"}</td> */}
-      {/* <ToggleProjectStatus project={project} /> */}
-      <td>
+      <ToggleProjectStatus project={project} />
+      {/* <td>
         {project?.status === "OPEN" ? (
           <span className="badge badge--success">باز</span>
         ) : (
           <span className="badge badge--error">بسته</span>
         )}
-      </td>
+      </td> */}
       <td>
         <div className="flex items-center gap-x-4">
           <button
