@@ -1,8 +1,12 @@
-import React from 'react'
+import PorjectHeader from '../features/freelancer/project/ProjectHeader'
+import PorjectTable from '../features/freelancer/project/ProjectTable'
 
 const SubmitedProjects = () => {
   return (
-    <div>SubmitedProjects</div>
+    <>
+      <PorjectHeader/>
+      <PorjectTable/>
+    </>
   )
 }
 

@@ -8,6 +8,7 @@ const TextField = ({
   required,
   errors,
   validationSchema,
+  type = "text",
 }) => {
   return (
     <>
@@ -15,7 +16,7 @@ const TextField = ({
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <input
-        type="text"
+        type={type}
         id={name}
         {...register(name, validationSchema)}
         name={name}
