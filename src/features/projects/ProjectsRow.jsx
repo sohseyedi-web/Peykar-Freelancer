@@ -35,15 +35,7 @@ const ProjectsRow = ({ project, index }) => {
           ))}
         </div>
       </td>
-      {/* <td>{project?.freelancer?.name || "-"}</td> */}
       <ToggleProjectStatus project={project} />
-      {/* <td>
-        {project?.status === "OPEN" ? (
-          <span className="badge badge--success">باز</span>
-        ) : (
-          <span className="badge badge--error">بسته</span>
-        )}
-      </td> */}
       <td>
         <div className="flex items-center gap-x-4">
           <button
@@ -57,7 +49,10 @@ const ProjectsRow = ({ project, index }) => {
             open={isEditOpen}
             title={`ویرایش پروژه ${project?.title}`}
           >
-            <CreateForm onClose={() => setIsEditOpen(!isEditOpen)} />
+            <CreateForm
+              onClose={() => setIsEditOpen(!isEditOpen)}
+              projectToEdit={project}
+            />
           </Modal>
           <button
             className="text-red-500"

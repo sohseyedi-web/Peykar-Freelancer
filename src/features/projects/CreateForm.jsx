@@ -6,33 +6,65 @@ import { useCategories } from "../../hooks/useCategories";
 import { TagsInput } from "react-tag-input-component";
 import DatePickerField from "../../ui/DatePickerField";
 import { useState } from "react";
+import { useEditProject } from "./useEditProject";
 
-const CreateForm = ({ onClose }) => {
-  const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(new Date(""));
+const CreateForm = ({ onClose, projectToEdit = {} }) => {
+  const { _id: editId } = projectToEdit;
+  const isEditSession = Boolean(editId);
+  const {
+    title,
+    tags: prevTags,
+    deadline,
+    category,
+    description,
+    budget,
+  } = projectToEdit;
+  let editValues = {};
+
+  if (isEditSession) {
+    editValues = {
+      title,
+      category: category?._id,
+      description,
+      budget,
+    };
+  }
+
+  const [tags, setTags] = useState(prevTags || []);
+  const [date, setDate] = useState(new Date(deadline || ""));
   const { createProject, isCreating } = useCreateProject();
   const { categories, transformCategories } = useCategories();
-
-  console.log(categories);
+  const { editProject, isUpdating } = useEditProject();
 
   const {
     register,
     formState: { errors },
     reset,
     handleSubmit,
-  } = useForm();
+  } = useForm({ defaultValues: editValues });
 
   const onSumbit = async (data) => {
-    const newData = {
+    const newProject = {
       ...data,
       tags,
       deadline: new Date(date).toISOString(),
     };
-    await createProject(newData, {
-      onSuccess: () => {
-        onClose(), reset();
-      },
-    });
+    if (isEditSession) {
+      await editProject(
+        { id: editId, newProject },
+        {
+          onSuccess: () => {
+            onClose();
+          },
+        }
+      );
+    } else {
+      await createProject(newProject, {
+        onSuccess: () => {
+          onClose(), reset();
+        },
+      });
+    }
   };
 
   return (
@@ -101,9 +133,15 @@ const CreateForm = ({ onClose }) => {
         />
       </div>
       <DatePickerField date={date} setDate={setDate} />
-      <button className="btn btn--primary w-full">
-        {isCreating ? "لطفا صبر کنید." : "تایید"}
-      </button>
+      {isEditSession ? (
+        <button className="btn btn--primary w-full">
+          {isUpdating ? "لطفا صبر کنید." : "تایید"}
+        </button>
+      ) : (
+        <button className="btn btn--primary w-full">
+          {isCreating ? "لطفا صبر کنید." : "تایید"}
+        </button>
+      )}
     </form>
   );
 };
