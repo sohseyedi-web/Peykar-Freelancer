@@ -3,9 +3,9 @@ import { useSearchParams } from "react-router-dom";
 const SelectFilter = ({ filterField, options }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const value = searchParams.get(filterField || "");
-  
+
   const onChangeHandler = (e) => {
-    searchParams.set(value, e.target.value);
+    searchParams.set(filterField, e.target.value);
     setSearchParams(searchParams);
   };
 

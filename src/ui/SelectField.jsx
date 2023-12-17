@@ -10,7 +10,7 @@ const SelectField = ({
   errors,
 }) => {
   return (
-    <div>
+    <div className="space-y-3">
       <label className="block mb-1 text-lg text-right">
         {label} {required && <span className="text-error">*</span>}
       </label>

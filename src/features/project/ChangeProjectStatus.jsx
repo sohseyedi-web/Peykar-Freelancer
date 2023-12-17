@@ -30,8 +30,7 @@ const ChangeProjectStatus = ({ proposalId, onClose }) => {
     await changeProposalStatus(
       {
         id: proposalId,
-        projectId,
-        ...data,
+        data,
       },
       {
         onSuccess: () => {
@@ -43,7 +42,7 @@ const ChangeProjectStatus = ({ proposalId, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <SelectField
         label={"تغییر وضعیت"}
         name="status"
@@ -51,6 +50,9 @@ const ChangeProjectStatus = ({ proposalId, onClose }) => {
         required
         options={optionList}
       />
+      <button className="btn btn--primary w-full">
+        {isUpdating ? "لطفا صبر کنید" : "تایید"}
+      </button>
     </form>
   );
 };

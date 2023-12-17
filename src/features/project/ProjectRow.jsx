@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { toPersianNumbers, toPersianNumbersWithComma } from "../../utils/toPersianNumbers";
+import truncateText from "../../utils/truncateText";
 import Modal from "./../../ui/Modal";
 import SelectField from "./../../ui/SelectField";
 import ChangeProjectStatus from "./ChangeProjectStatus";
@@ -19,7 +21,7 @@ const statusStyle = [
   },
 ];
 
-const ProjectRow = ({ proposal }) => {
+const ProjectRow = ({ proposal , index}) => {
   const { status } = proposal;
   const [open, setOpen] = useState(false);
 
