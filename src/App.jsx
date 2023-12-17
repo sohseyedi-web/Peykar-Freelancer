@@ -10,6 +10,7 @@ import OwnerLayout from "./features/owner/OwnerLayout";
 import FreeLancerLayout from "./features/freelancer/FreeLancerLayout";
 import Proposals from "./pages/Proposals";
 import SubmitedProjects from "./pages/SubmitedProjects";
+import ProtectedRoutes from "./ui/ProtectedRoutes";
 
 function App() {
   return (
@@ -17,13 +18,27 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/join" element={<Auth />} />
-        <Route path="/owner" element={<OwnerLayout />}>
+        <Route
+          path="/owner"
+          element={
+            <ProtectedRoutes>
+              <OwnerLayout />
+            </ProtectedRoutes>
+          }
+        >
           <Route index element={<Navigate to={"dashboard"} replace />} />
           <Route path="dashboard" element={<Owner />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<Project />} />
         </Route>
-        <Route path="/freelancer" element={<FreeLancerLayout />}>
+        <Route
+          path="/freelancer"
+          element={
+            <ProtectedRoutes>
+              <FreeLancerLayout />
+            </ProtectedRoutes>
+          }
+        >
           <Route index element={<Navigate to={"dashboard"} replace />} />
           <Route path="dashboard" element={<FreeLancer />} />
           <Route path="projects" element={<SubmitedProjects />} />

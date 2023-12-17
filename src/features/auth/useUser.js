@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {getUserProfile} from '../../service/authService'
+import { getUserProfile } from "../../service/authService";
 
 export default function useUser() {
   const { data, isLoading } = useQuery({
@@ -7,5 +7,6 @@ export default function useUser() {
     queryFn: getUserProfile,
     retry: false,
   });
+
   return { data, isLoading };
 }
