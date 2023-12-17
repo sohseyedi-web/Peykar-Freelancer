@@ -17,5 +17,5 @@ export const useCategories = () => {
     value: item.englishTitle,
   }));
 
-  return { isPending, transformCategories, categories };
+  return { isPending, transformCategories, categories,rawCategories };
 };

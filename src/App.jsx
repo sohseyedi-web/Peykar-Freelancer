@@ -11,6 +11,10 @@ import FreeLancerLayout from "./features/freelancer/FreeLancerLayout";
 import Proposals from "./pages/Proposals";
 import SubmitedProjects from "./pages/SubmitedProjects";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
+import AdminLayout from "./features/admin/AdminLayout";
+import Admin from "./pages/Admin";
+import UserList from './pages/UserList';
+import CategoryProjects from "./pages/CategoryProjects";
 
 function App() {
   return (
@@ -43,6 +47,20 @@ function App() {
           <Route path="dashboard" element={<FreeLancer />} />
           <Route path="projects" element={<SubmitedProjects />} />
           <Route path="proposals" element={<Proposals />} />
+        </Route>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoutes>
+              <AdminLayout />
+            </ProtectedRoutes>
+          }
+        >
+          <Route index element={<Navigate to={"dashboard"} replace />} />
+          <Route path="dashboard" element={<Admin />} />
+          <Route path="projects" element={<SubmitedProjects />} />
+          <Route path="category" element={<CategoryProjects/>}/>
+          <Route path="users" element={<UserList />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
