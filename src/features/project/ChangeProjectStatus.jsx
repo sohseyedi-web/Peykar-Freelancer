@@ -30,7 +30,8 @@ const ChangeProjectStatus = ({ proposalId, onClose }) => {
     await changeProposalStatus(
       {
         id: proposalId,
-        data,
+        projectId,
+        ...data,
       },
       {
         onSuccess: () => {

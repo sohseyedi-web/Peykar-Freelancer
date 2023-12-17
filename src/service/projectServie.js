@@ -1,8 +1,6 @@
 import http from "./http";
-export function getProjects({ filter, sort, category }) {
-  const qs = `${filter?.field}=${filter?.value}&${sort.field}=${sort.value}&${category?.field}=${category?.value}`;
-
-  return http.get(`/project/list?${qs}`).then(({ data }) => data.data);
+export function getProjects(qs) {
+  return http.get(`/project/list/${qs}`).then(({ data }) => data.data);
 }
 
 export function getOwnerProjectsApi() {

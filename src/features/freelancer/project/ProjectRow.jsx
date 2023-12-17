@@ -6,18 +6,6 @@ import { useState } from "react";
 import Modal from "./../../../ui/Modal";
 import CreateProposal from "../../proposals/CreateProposal";
 
-const statusStyle = [
-  {
-    label: "بسته",
-    className: "badge--danger",
-  },
-
-  {
-    label: "باز",
-    className: "badge--success",
-  },
-];
-
 const ProjectRow = ({ project, index }) => {
   const { status } = project || {};
   const [open, setOpen] = useState(false);
@@ -25,13 +13,17 @@ const ProjectRow = ({ project, index }) => {
   return (
     <tr key={project?._id}>
       <td>{index + 1}</td>
-      <td>{truncateText(project?.title, 30)}</td>
-      <td>{toPersianNumbersWithComma(project?.budget)}</td>
+      <td>
+        <p>{truncateText(project?.title, 30)}</p>
+      </td>
+      <td>{toPersianNumbersWithComma(String(project?.budget))}</td>
       <td>{toLocaleDate(project?.deadline)}</td>
       <td>
-        <span className={`badge ${statusStyle[status].className}`}>
-          {statusStyle[status].label}
-        </span>
+        {project.status === "OPEN" ? (
+          <span className="badge badge--success">باز</span>
+        ) : (
+          <span className="badge badge--danger">بسته</span>
+        )}
       </td>
       <td>
         <Modal
@@ -44,7 +36,7 @@ const ProjectRow = ({ project, index }) => {
             projectId={project?._id}
           />
         </Modal>
-        <button>
+        <button onClick={() => setOpen(true)}>
           <MdAssignmentAdd className="w-4 h-4 text-blue-500" />
         </button>
       </td>

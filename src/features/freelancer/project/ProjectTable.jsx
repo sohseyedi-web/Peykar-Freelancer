@@ -24,8 +24,8 @@ const ProjectTable = () => {
             </tr>
           </thead>
           <tbody>
-            {projects?.map((projects, index) => (
-              <ProjectRow key={projects._id} index={index} proposal={projects} />
+            {projects?.map((project, index) => (
+              <ProjectRow key={project?._id} index={index} project={project} />
             ))}
           </tbody>
         </table>
