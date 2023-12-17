@@ -1,12 +1,12 @@
 import { toPersianNumbersWithComma } from "../../../utils/toPersianNumbers";
 import truncateText from "../../../utils/truncateText";
-import toLocaleDate from "./../../../utils/toLocalDateString";
+import toLocaleDate from "../../../utils/toLocalDateString";
 import { MdAssignmentAdd } from "react-icons/md";
 import { useState } from "react";
-import Modal from "./../../../ui/Modal";
+import Modal from "../../../ui/Modal";
 import CreateProposal from "../../proposals/CreateProposal";
 
-const ProjectRow = ({ project, index }) => {
+const SubmitProjectRow = ({ project, index }) => {
   const { status } = project || {};
   const [open, setOpen] = useState(false);
 
@@ -44,4 +44,4 @@ const ProjectRow = ({ project, index }) => {
   );
 };
 
-export default ProjectRow;
+export default SubmitProjectRow;

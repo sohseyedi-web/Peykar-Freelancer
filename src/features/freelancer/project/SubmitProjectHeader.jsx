@@ -2,8 +2,14 @@ import { useCategories } from "../../../hooks/useCategories";
 import SelectFilter from "../../../ui/SelectFilter";
 
 const sortOption = [
-  { label: "مرتب سازی(جدیدترین)", value: "latest" },
-  { label: "مرتب سازی(قدیمی ترین)", value: "earlist" },
+  {
+    value: "latest",
+    label: "مرتب سازی (جدید ترین)",
+  },
+  {
+    value: "earliest",
+    label: "مرتب سازی (قدیمی ترین)",
+  },
 ];
 const statusOption = [
   { label: "وضعیت(همه)", value: "ALL" },
@@ -11,7 +17,7 @@ const statusOption = [
   { label: "بسته", value: "CLOSE" },
 ];
 
-const ProjectHeader = () => {
+const SubmitProjectHeader = () => {
   const { transformCategories } = useCategories();
 
   return (
@@ -35,4 +41,4 @@ const ProjectHeader = () => {
   );
 };
 
-export default ProjectHeader;
+export default SubmitProjectHeader;
