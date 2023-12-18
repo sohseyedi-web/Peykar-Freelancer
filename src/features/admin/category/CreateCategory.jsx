@@ -2,23 +2,44 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import TextField from "../../../ui/TextField";
 import { useCreateCategory } from "./../useCreateCategory";
+import { useEditCategory } from "./../useEditCategory";
 
-const CreateCategory = ({ onClose }) => {
+const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
+  const { _id: categoryId } = categoryToEdit;
+  const isCategorySession = Boolean(categoryId);
+  let editValues = {};
+
+  if (isCategorySession) {
+    editValues = {
+      ...categoryToEdit,
+      type: "project",
+    };
+  }
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({ defaultValues: editValues });
 
   const { addCategory, isCreating } = useCreateCategory();
+  const { editCategories, isUpdating } = useEditCategory();
 
   const onSubmit = async (data) => {
-    await addCategory(
-      { ...data, type: "project" },
-      {
+    const newCategory = { ...data, type: "project" };
+
+    if (isCategorySession) {
+      await editCategories(
+        { id: categoryId, newCategory },
+        {
+          onSuccess: () => onClose(),
+        }
+      );
+    } else {
+      await addCategory(newCategory, {
         onSuccess: () => onClose(),
-      }
-    );
+      });
+    }
   };
 
   return (
@@ -60,9 +81,15 @@ const CreateCategory = ({ onClose }) => {
           required: "عنوان انگلیسی ضرروی است",
         }}
       />
-      <button className="btn btn--primary w-full">
-        {isCreating ? "لطفا صبر کنید" : "تایید"}
-      </button>
+      {isCategorySession ? (
+        <button className="btn btn--primary w-full">
+          {isUpdating ? "لطفا صبر کنید." : "تایید"}
+        </button>
+      ) : (
+        <button className="btn btn--primary w-full">
+          {isCreating ? "لطفا صبر کنید." : "تایید"}
+        </button>
+      )}
     </form>
   );
 };
