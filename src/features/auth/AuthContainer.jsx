@@ -7,8 +7,10 @@ import { getOTP } from "../../service/authService";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 
+
 const AuthContainer = () => {
   const [step, setStep] = useState(2);
+  
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: getOTP,
