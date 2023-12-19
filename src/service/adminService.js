@@ -16,3 +16,7 @@ export function removeCategory(id) {
     .delete(`/admin/category/remove/${id}`)
     .then(({ data }) => data.data);
 }
+
+export function changeUserStatusApi({ id, data }) {
+  return http.patch(`/admin/user/verify/${id}`, data).then(({ data }) => data.data);
+}

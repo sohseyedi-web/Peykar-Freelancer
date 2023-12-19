@@ -1,6 +1,9 @@
 import React from "react";
 import { toPersianNumbers } from "../../../utils/toPersianNumbers";
 import toLocaleDate from "../../../utils/toLocalDateString";
+import { useState } from "react";
+import Modal from './../../../ui/Modal';
+import ChangeUserStatus from "./ChangeUserStatus";
 
 const ROLES = {
   ADMIN: "ادمین",
@@ -11,6 +14,7 @@ const ROLES = {
 
 const UserListRow = ({ user, index }) => {
   const { role } = user;
+  const [open,setOpen] = useState(false);
 
   return (
     <tr key={user?._id}>
@@ -22,7 +26,19 @@ const UserListRow = ({ user, index }) => {
       <td>{ROLES[role]}</td>
       <td>{toPersianNumbers(user?.phoneNumber)}</td>
       <td>{toLocaleDate(user?.createdAt)}</td>
-      <td className="text-indigo-500 cursor-pointer">مشاهده اطلاعات</td>
+      <td>
+        <Modal
+          onClose={() => setOpen(!open)}
+          open={open}
+          title={"تغییر وضعیت کاربر"}
+        >
+          <ChangeUserStatus
+            onClose={() => setOpen(!open)}
+            userId={user?._id}
+          />
+        </Modal>
+        <button className="text-indigo-400" onClick={() => setOpen(true)}>تغییر وضعیت</button>
+      </td>
     </tr>
   );
 };
