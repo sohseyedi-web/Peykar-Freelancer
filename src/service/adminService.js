@@ -8,7 +8,7 @@ export function addNewCategories(data) {
 }
 export function editCategory({ id, newCategory }) {
   return http
-    .patch(`/admin/category/update/${id}`, newCategory)
+    .patch(`/admin/category/update/${id}`,newCategory)
     .then(({ data }) => data.data);
 }
 export function removeCategory(id) {

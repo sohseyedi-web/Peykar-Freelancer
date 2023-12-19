@@ -6,13 +6,15 @@ import { useEditCategory } from "./../useEditCategory";
 
 const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
   const { _id: categoryId } = categoryToEdit;
+  const {  englishTitle, title, description } = categoryToEdit;
   const isCategorySession = Boolean(categoryId);
   let editValues = {};
 
   if (isCategorySession) {
     editValues = {
-      ...categoryToEdit,
-      type: "project",
+      englishTitle,
+      title,
+      description,
     };
   }
 
@@ -81,6 +83,7 @@ const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
           required: "عنوان انگلیسی ضرروی است",
         }}
       />
+
       {isCategorySession ? (
         <button className="btn btn--primary w-full">
           {isUpdating ? "لطفا صبر کنید." : "تایید"}
