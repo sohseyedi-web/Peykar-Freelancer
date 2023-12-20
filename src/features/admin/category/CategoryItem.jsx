@@ -1,14 +1,30 @@
 import React, { useState } from "react";
 import * as RiIcon from "react-icons/ri";
 import { useRemoveCategory } from "../useRemoveCategory";
-import Modal from './../../../ui/Modal';
-import CreateCategory from './CreateCategory';
-import ConfirmDelete from './../../../ui/ConfirmDelete';
+import Modal from "./../../../ui/Modal";
+import CreateCategory from "./CreateCategory";
+import ConfirmDelete from "./../../../ui/ConfirmDelete";
+import { toast } from "react-hot-toast";
 
-const CategoryItem = ({ item }) => {
+const CategoryItem = ({ item, projects }) => {
   const { isDeleting, removeCategories } = useRemoveCategory();
+  const hasCategoryProject = projects.filter(
+    (project) => project.category?.title === item?.title
+  );
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const handleRemoveCategory = () => {
+    if (hasCategoryProject?.length) {
+      toast.error("پروژه ای با این دسته بندی فعال است");
+    } else {
+      removeCategories(item?._id, {
+        onSuccess: () => setIsDeleteOpen(false),
+      });
+    }
+  };
+
   return (
     <div
       className="lg:w-[24%] flex items-center justify-between h-[45px] md:w-[45%] w-full md:mx-0 mx-auto rounded-md bg-slate-900 shadow-md px-2 py-1"
@@ -39,13 +55,10 @@ const CategoryItem = ({ item }) => {
         >
           <ConfirmDelete
             loading={isDeleting}
+            hasItem={hasCategoryProject}
             title={`${item?.title}`}
             onClose={() => setIsDeleteOpen(false)}
-            onRemove={() => {
-              removeCategories(item?._id, {
-                onSuccess: () => setIsDeleteOpen(false),
-              });
-            }}
+            onRemove={handleRemoveCategory}
           />
         </Modal>
       </div>

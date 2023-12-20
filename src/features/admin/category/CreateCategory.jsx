@@ -6,7 +6,7 @@ import { useEditCategory } from "./../useEditCategory";
 
 const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
   const { _id: categoryId } = categoryToEdit;
-  const {  englishTitle, title, description } = categoryToEdit;
+  const { englishTitle, title, description } = categoryToEdit;
   const isCategorySession = Boolean(categoryId);
   let editValues = {};
 
@@ -26,6 +26,7 @@ const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
 
   const { addCategory, isCreating } = useCreateCategory();
   const { editCategories, isUpdating } = useEditCategory();
+  
 
   const onSubmit = async (data) => {
     const newCategory = { ...data, type: "project" };
