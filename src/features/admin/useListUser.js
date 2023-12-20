@@ -9,7 +9,5 @@ export const useListUser = () => {
 
   const { users } = data || {};
 
-  console.log(data);
-
   return { users, isLoading };
 };

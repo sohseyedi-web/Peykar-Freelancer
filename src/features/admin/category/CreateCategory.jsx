@@ -26,7 +26,6 @@ const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
 
   const { addCategory, isCreating } = useCreateCategory();
   const { editCategories, isUpdating } = useEditCategory();
-  
 
   const onSubmit = async (data) => {
     const newCategory = { ...data, type: "project" };
