@@ -1,8 +1,13 @@
 import React from 'react'
+import Intro from '../features/home/Intro'
+import Navbar from '../features/home/Navbar'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <section className='h-screen'>
+      <Navbar/>
+      <Intro/>
+    </section>
   )
 }
 
