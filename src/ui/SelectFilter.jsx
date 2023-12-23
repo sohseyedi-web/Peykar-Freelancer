@@ -12,7 +12,11 @@ const SelectFilter = ({ filterField, options }) => {
   return (
     <select className="selectField" value={value} onChange={onChangeHandler}>
       {options.map((option) => (
-        <option key={option.value} value={option.value}>
+        <option
+          key={option.value}
+          className=" bg-[#092635]"
+          value={option.value}
+        >
           {option.label}
         </option>
       ))}

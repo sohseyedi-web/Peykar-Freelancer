@@ -5,7 +5,6 @@ import { getProjects } from "../service/projectServie";
 export const useProjects = () => {
   const { search } = useLocation();
   const queryParserd = queryString.parse(search);
-  console.log(queryParserd);
   const { data, isLoading } = useQuery({
     queryKey: ["projects", queryParserd],
     queryFn: () => getProjects(search),

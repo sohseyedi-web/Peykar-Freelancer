@@ -16,7 +16,11 @@ const SelectField = ({
       </label>
       <select {...register(name, validationSchema)} className="textField">
         {options.map((option) => (
-          <option value={option.value} key={option.value}>
+          <option
+            className=" bg-[#092635]"
+            value={option.value}
+            key={option.value}
+          >
             {option.label}
           </option>
         ))}
