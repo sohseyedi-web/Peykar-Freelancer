@@ -8,5 +8,7 @@ export default function useUser() {
     retry: false,
   });
 
-  return { data, isLoading };
+  const role = data?.user?.role.toLowerCase();
+
+  return { data, isLoading,role };
 }

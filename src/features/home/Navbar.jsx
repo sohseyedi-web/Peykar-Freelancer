@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import useUser from "./../auth/useUser";
 
 const Navbar = () => {
-  const { data: user, isLoading } = useUser();
-  const lowerRole = user?.user?.role.toLowerCase();
+  const { data: user, isLoading,role } = useUser();
 
   return (
     <nav className="py-4 border-b-2 border-slate-800" dir="rtl">
@@ -15,7 +14,7 @@ const Navbar = () => {
             ورورد / ثبت نام
           </Link>
         ) : (
-          <Link to={`/${lowerRole}`} className="btn btn--success px-2 w-[180px]">
+          <Link to={`/${role}`} className="btn btn--success px-2 w-[180px]">
             {user?.user?.name}
           </Link>
         )}

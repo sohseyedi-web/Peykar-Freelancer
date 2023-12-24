@@ -7,11 +7,11 @@ import useUser from "./../features/auth/useUser";
 const Auth = () => {
   const navigate = useNavigate();
   const { isLoading, isAuthenticated } = useAuthorize();
-  const { data: user } = useUser();
-  const lowerRole = user?.user?.role.toLowerCase();
+  const { data: user,role } = useUser();
+  
 
   useEffect(() => {
-    if (isAuthenticated) return navigate(`/${lowerRole}`);
+    if (isAuthenticated) return navigate(`/${role}`);
   }, [isAuthenticated, user, isLoading, navigate]);
 
   return (
