@@ -22,7 +22,7 @@ const UserListTable = () => {
             <th>#</th>
             <th>نام کاربری</th>
             <th>ایمیل</th>
-            <th>وضعیت</th>
+            <th>نقش</th>
             <th>شماره موبایل</th>
             <th>تاریخ عضویت</th>
             <th>عملیات</th>

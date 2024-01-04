@@ -9,7 +9,7 @@ const ROLES = {
 
 const HeaderDashboard = ({ user }) => {
   return (
-    <header className="flex items-center justify-between">
+    <header className="flex items-center justify-between md:flex-row flex-col">
       <div className="flex items-center gap-x-2">
         <span>خوش اومدی</span>
         <h3 className="font-bold">{user?.name}</h3>
