@@ -22,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/join" element={<Auth />} />
+        {/* owner routes */}
         <Route
           path="/owner"
           element={
@@ -35,6 +36,7 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<Project />} />
         </Route>
+        {/* freelander routes */}
         <Route
           path="/freelancer"
           element={
@@ -48,6 +50,7 @@ function App() {
           <Route path="projects" element={<SubmitedProjects />} />
           <Route path="proposals" element={<Proposals />} />
         </Route>
+        {/* admin routes */}
         <Route
           path="/admin"
           element={
