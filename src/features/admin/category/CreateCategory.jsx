@@ -1,12 +1,36 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import SelectField from "../../../ui/SelectField";
 import TextField from "../../../ui/TextField";
 import { useCreateCategory } from "./../useCreateCategory";
 import { useEditCategory } from "./../useEditCategory";
 
+const categoryTypes = [
+  {
+    id: 1,
+    label: "محصول",
+    value: "product",
+  },
+  {
+    id: 2,
+    label: "پست",
+    value: "post",
+  },
+  {
+    id: 3,
+    label: "تیکت",
+    value: "ticket",
+  },
+  {
+    id: 4,
+    label: "نظرات",
+    value: "comment",
+  },
+];
+
 const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
   const { _id: categoryId } = categoryToEdit;
-  const { englishTitle, title, description } = categoryToEdit;
+  const { englishTitle, title, description, type } = categoryToEdit;
   const isCategorySession = Boolean(categoryId);
   let editValues = {};
 
@@ -15,6 +39,7 @@ const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
       englishTitle,
       title,
       description,
+      type,
     };
   }
 
@@ -28,11 +53,16 @@ const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
   const { editCategories, isUpdating } = useEditCategory();
 
   const onSubmit = async (data) => {
-    const newCategory = { ...data, type: "project" };
+    const newCategory = { ...data };
 
     if (isCategorySession) {
       await editCategories(
-        { id: categoryId, newCategory },
+        {
+          id: categoryId,
+          newCategory: {
+            ...data,
+          },
+        },
         {
           onSuccess: () => onClose(),
         }
@@ -81,6 +111,17 @@ const CreateCategory = ({ onClose, categoryToEdit = {} }) => {
         register={register}
         validationSchema={{
           required: "عنوان انگلیسی ضرروی است",
+        }}
+      />
+      <SelectField
+        label={"نوع دسته بندی"}
+        name="type"
+        register={register}
+        required
+        errors={errors}
+        options={categoryTypes}
+        validationSchema={{
+          required: "نوع دسته بندی ضرروی است",
         }}
       />
 

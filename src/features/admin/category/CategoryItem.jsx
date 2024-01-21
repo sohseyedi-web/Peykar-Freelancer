@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 
 const CategoryItem = ({ item, projects }) => {
   const { isDeleting, removeCategories } = useRemoveCategory();
-  const hasCategoryProject = projects.filter(
+  const hasCategoryProject = projects?.filter(
     (project) => project.category?.title === item?.title
   );
 
